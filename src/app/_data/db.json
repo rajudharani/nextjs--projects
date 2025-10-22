@@ -1,0 +1,41 @@
+{
+  "contacts": [
+    {
+      "id": "1",
+      "name": "Dharani",
+      "email": "dharani@gmail.com",
+      "userId": "1",
+      "phone": "",
+      "address": "andhrapradesh",
+      "company": "stayhub",
+      "notes": "",
+      "updatedAt": "2025-10-22T04:28:31.874Z"
+    },
+    {
+      "id": "b615",
+      "name": "uday",
+      "email": "uday@gmail.com",
+      "phone": "56789432",
+      "address": "ap",
+      "company": "royalenfield",
+      "notes": "",
+      "userId": "1ca7",
+      "createdAt": "2025-10-22T05:08:16.321Z",
+      "updatedAt": "2025-10-22T05:08:16.321Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "user1",
+      "email": "user1@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "1ca7",
+      "name": "uday",
+      "email": "uday@gmail.com",
+      "password": "123456"
+    }
+  ]
+}
