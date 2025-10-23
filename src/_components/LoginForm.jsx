@@ -16,15 +16,17 @@ export default function LoginForm() {
 
     try {
       const formData = new FormData(e.target);
-      await loginAction(formData);
-      // If we reach here, login was successful and redirect happened
-    } catch (error) {
-      // Handle the error properly
-      if (error.message?.includes("NEXT_REDIRECT")) {
-        // This is expected - redirect is happening
-        return;
+      const result = await loginAction(formData);
+      
+      if (result.success) {
+        // Redirect to the specified page
+        router.push(result.redirectTo || "/contact");
+      } else {
+        setError(result.message || "An error occurred during login. Please try again.");
       }
-      setError(error.message || "An error occurred during login. Please try again.");
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }

@@ -12,14 +12,14 @@ export const loginAction = async (formData) => {
     const password = formData.get("password");
 
     if (!email || !password) {
-      throw new Error("Email and password are required");
+      return { success: false, message: "Email and password are required" };
     }
 
     const response = await axios.get(`${API_URL}?email=${email}&password=${password}`);
     const user = response.data[0];
 
     if (!user) {
-      throw new Error("Invalid credentials");
+      return { success: false, message: "Invalid credentials" };
     }
 
     // ✅ Save user session
@@ -31,18 +31,12 @@ export const loginAction = async (formData) => {
 
     console.log("✅ Login successful:", user);
 
-    // ✅ Perform redirect (this throws a NEXT_REDIRECT signal internally)
-    redirect("/contact");
+    // ✅ Return success with redirect path
+    return { success: true, redirectTo: "/contact" };
 
   } catch (error) {
-    // ✅ Ignore NEXT_REDIRECT (this is expected behavior)
-    if (error.message?.includes("NEXT_REDIRECT")) {
-      console.log("➡️ Redirecting after login (not an error).");
-      return;
-    }
-
     console.error("❌ Login failed:", error.message || error);
-    throw new Error(`Failed to login: ${error.message}`);
+    return { success: false, message: `Failed to login: ${error.message}` };
   }
 };
 
@@ -54,21 +48,21 @@ export const registerAction = async (formData) => {
     const confirmPassword = formData.get("confirmPassword");
 
     if (!name || !email || !password || !confirmPassword) {
-      throw new Error("All fields are required");
+      return { success: false, message: "All fields are required" };
     }
 
     if (password !== confirmPassword) {
-      throw new Error("Passwords do not match");
+      return { success: false, message: "Passwords do not match" };
     }
 
     if (password.length < 6) {
-      throw new Error("Password must be at least 6 characters long");
+      return { success: false, message: "Password must be at least 6 characters long" };
     }
 
     // Check if user already exists
     const existingUserResponse = await axios.get(`${API_URL}?email=${email}`);
     if (existingUserResponse.data.length > 0) {
-      throw new Error("User with this email already exists");
+      return { success: false, message: "User with this email already exists" };
     }
 
     // Create new user
@@ -90,18 +84,12 @@ export const registerAction = async (formData) => {
 
     console.log("✅ Registration successful:", user);
 
-    // Redirect to contacts page
-    redirect("/contact");
+    // Return success with redirect path
+    return { success: true, redirectTo: "/contact" };
 
   } catch (error) {
-    // Ignore NEXT_REDIRECT (this is expected behavior)
-    if (error.message?.includes("NEXT_REDIRECT")) {
-      console.log("➡️ Redirecting after registration (not an error).");
-      return;
-    }
-
     console.error("❌ Registration failed:", error.message || error);
-    throw new Error(`Failed to register: ${error.message}`);
+    return { success: false, message: `Failed to register: ${error.message}` };
   }
 };
 
