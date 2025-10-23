@@ -5,8 +5,8 @@ import LoginForm from "@/_components/LoginForm";
 
 const LoginPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="mx-auto w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
             <svg
@@ -28,10 +28,8 @@ const LoginPage = () => {
             Sign in to your Contact Manager account
           </p>
         </div>
-      </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white/80 backdrop-blur-sm py-8 px-4 shadow-xl sm:rounded-2xl sm:px-10 border border-white/20">
+        <div className="bg-white/80 backdrop-blur-sm py-8 px-4 shadow-xl rounded-2xl border border-white/20">
           <LoginForm />
           
           <div className="mt-6 text-center">
